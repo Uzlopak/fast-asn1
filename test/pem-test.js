@@ -3,9 +3,6 @@
 
 const assert = require('assert');
 const asn1 = require('..');
-const BN = require('bn.js');
-
-const Buffer = require('safer-buffer').Buffer;
 
 describe('asn1.js PEM encoder/decoder', function() {
   const model = asn1.define('Model', function() {
@@ -21,12 +18,12 @@ describe('asn1.js PEM encoder/decoder', function() {
   it('should encode PEM', function() {
 
     const out = model.encode({
-      a: new BN(123),
+      a: 123n,
       b: {
         data: hundred,
         unused: 0
       },
-      c: new BN(456)
+      c: 456n
     }, 'pem', {
       label: 'MODEL'
     });

@@ -3,11 +3,10 @@
 
 const assert = require('assert');
 const asn1 = require('..');
-const bn = asn1.bignum;
 const fixtures = require('./fixtures');
 const jsonEqual = fixtures.jsonEqual;
 
-const Buffer = require('safer-buffer').Buffer;
+
 
 describe('asn1.js error', function() {
   describe('encoder', function() {
@@ -205,7 +204,7 @@ describe('asn1.js error', function() {
           this.key('d').int()
         )
       );
-    }, '30073005300022012e', { a: { b: {}, d: new bn(46) } }, [
+    }, '30073005300022012e', { a: { b: {}, d: 46n } }, [
       /"int" at: \["a"\]\["b"\]\["c"\]/
     ]);
 
@@ -218,7 +217,7 @@ describe('asn1.js error', function() {
           this.key('d').int()
         )
       );
-    }, '30073005300322012e', { a: { b: { c: new bn(46) } } }, [
+    }, '30073005300322012e', { a: { b: { c: 46n } } }, [
       /"int" at: \["a"\]\["d"\]/
     ]);
   });

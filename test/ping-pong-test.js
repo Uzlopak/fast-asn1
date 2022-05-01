@@ -1,12 +1,9 @@
 'use strict';
 /* global describe it */
 
-const assert = require('assert');
 const asn1 = require('..');
 const fixtures = require('./fixtures');
 const jsonEqual = fixtures.jsonEqual;
-
-const Buffer = require('safer-buffer').Buffer;
 
 describe('asn1.js ping/pong', function() {
   function test(name, model, input, expected) {
@@ -22,7 +19,7 @@ describe('asn1.js ping/pong', function() {
   describe('primitives', function() {
     test('bigint', function() {
       this.int();
-    }, new asn1.bignum('0102030405060708', 16));
+    }, 0x0102030405060708n);
 
     test('enum', function() {
       this.enum({ 0: 'hello', 1: 'world' });

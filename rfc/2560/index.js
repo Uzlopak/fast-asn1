@@ -1,7 +1,7 @@
 'use strict';
 
-const asn1 = require('asn1.js');
-const rfc5280 = require('asn1.js-rfc5280');
+const asn1 = require('../../lib/asn1');
+const rfc5280 = require('../5280');
 
 const OCSPRequest = asn1.define('OCSPRequest', function() {
   this.seq().obj(

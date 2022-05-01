@@ -3,10 +3,7 @@
 
 const assert = require('assert');
 const fs = require('fs');
-const asn1 = require('../../../');
 const rfc5280 = require('..');
-
-const Buffer = require('safer-buffer').Buffer;
 
 describe('asn1.js RFC5280', function() {
 
@@ -17,7 +14,7 @@ describe('asn1.js RFC5280', function() {
     const tbs = res.tbsCertificate;
     assert.equal(tbs.version, 'v3');
     assert.deepEqual(tbs.serialNumber,
-      new asn1.bignum('462e4256bb1194dc', 16));
+      0x462e4256bb1194dcn);
     assert.equal(tbs.signature.algorithm.join('.'),
       '1.2.840.113549.1.1.5');
     assert.equal(tbs.signature.parameters.toString('hex'), '0500');
@@ -31,8 +28,7 @@ describe('asn1.js RFC5280', function() {
 
     const tbs = res.tbsCertificate;
     assert.equal(tbs.version, 'v3');
-    assert.deepEqual(tbs.serialNumber,
-      new asn1.bignum('4d955d20af85c49f6925fbab7c665f89', 16));
+    assert.deepEqual(tbs.serialNumber, 0x4d955d20af85c49f6925fbab7c665f89n);
     assert.equal(tbs.signature.algorithm.join('.'),
       '1.2.840.10045.4.3.3');  // RFC5754
     const spki = rfc5280.SubjectPublicKeyInfo.encode(tbs.subjectPublicKeyInfo,
@@ -143,11 +139,11 @@ describe('asn1.js RFC5280', function() {
     crl = rfc5280.CertificateList.decode(data, 'der');
     assert.equal(crl.tbsCertList.revokedCertificates.length, 2);
     assert.deepEqual(crl.tbsCertList.revokedCertificates[0].userCertificate,
-      new asn1.bignum('764bedd38afd51f7', 16));
+      0x764bedd38afd51f7n);
 
     const cert1 = crl.tbsCertList.revokedCertificates[1];
     assert.deepEqual(cert1.userCertificate,
-      new asn1.bignum('31da3380182af9b2', 16));
+      0x31da3380182af9b2n);
     assert.equal(cert1.crlEntryExtensions.length, 1);
 
     const ext1 = cert1.crlEntryExtensions[0];

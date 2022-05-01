@@ -3,9 +3,6 @@
 
 const assert = require('assert');
 const asn1 = require('..');
-const BN = require('bn.js');
-
-const Buffer = require('safer-buffer').Buffer;
 
 describe('asn1.js DER encoder', function() {
   /*
@@ -57,9 +54,9 @@ describe('asn1.js DER encoder', function() {
     this.explicit(0).seqof(Int);
   }, [ 1 ], 'A0053003020101' );
 
-  test('should encode BN(128) properly', function() {
+  test('should encode 128n properly', function() {
     this.int();
-  }, new BN(128), '02020080');
+  }, 128n, '02020080');
 
   test('should encode int 128 properly', function() {
     this.int();
